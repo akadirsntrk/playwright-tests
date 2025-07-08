@@ -10,5 +10,9 @@
   "devDependencies": {
     "@playwright/test": "^1.53.2",
     "@types/node": "^24.0.8"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "exceljs": "^4.4.0"
   }
 }

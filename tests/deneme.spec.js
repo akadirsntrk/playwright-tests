@@ -1,6 +1,7 @@
 const {test, expect} = require(`@playwright/test`);
 const { title } = require("process");
-
+const {LoginPage}=require('../pageobjects/LoginPage');
+test.describe.configure({mode:'parallel'});
 test(`Browser Playwright`,async ({browser}) =>{
     //playwright code
     //step 1 -open browser-
@@ -40,14 +41,16 @@ test(`Page Playwright`,async ({page}) =>{
 test.only(`Client App Login`,async ({page}) =>{
     //test.use({ storageState: undefined }); // tarayici bellegi sifirla
     const email = `agababa@gmail.com`
+    const pasword = "Paris954!"
     const productName = `ZARA COAT 3`;
-    const products = page.locator(".card-body")
-    await page.goto(`https://rahulshettyacademy.com/client`);
+    const products = page.locator(".card-body");
+    const loginpage = new LoginPage(page);
+    loginpage.goTo();
+    loginpage.validLogin(email,pasword);
     await page.getByPlaceholder('email@example.com').fill(email);
     await page.getByPlaceholder('enter your passsword').fill(`Paris954!`);
     await page.getByRole("button",{name:"Login"}).click();
     await page.waitForLoadState(`networkidle`);
-    await page.locator(".card-body b").first().waitFor();
     await page.locator(".card-body").filter({hasText:"ZARA COAT 3"}).getByRole("button",{name:"Add to Cart"}).click();
     await page.getByRole("listitem").getByRole("button",{name:"Cart"}).click();
     await page.locator("div li").first().waitFor();

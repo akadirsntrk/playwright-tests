@@ -16,6 +16,7 @@ const config = ({
     headlesss: false,
     screenshot:'on',
     trace: 'retain-on-failure',
+
   },
 
 
